@@ -30,8 +30,8 @@ OR population >= 25000000
 ```sql
 SELECT DISTINCT author_id as id
 FROM Views
-WHERE viewer_id >= 1
-AND author_id = viewer_id
+WHERE
+author_id = viewer_id
 ORDER BY author_id
 ```
 
