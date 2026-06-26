@@ -422,10 +422,46 @@ WHERE temp.od = 1
 👉 अशा Players ची Fraction काढा.
 
 
+
+⭐ Query Flow (याच क्रमाने विचार कर)
+Activity Table
+
+        │
+        ▼
+Find First Login
+(MIN + GROUP BY)
+
+        │
+        ▼
+Next Day
+(DATE_ADD)
+
+        │
+        ▼
+WHERE IN
+
+        │
+        ▼
+Matched Players
+(Logged in next day)
+
+        │
+        ▼
+COUNT(*)
+
+        │
+        ▼
+Divide by Total Players
+
+        │
+        ▼
+ROUND(...,2)
+
+
 ```sql
 SELECT
     ROUND(
-        COUNT(*) /
+        COUNT(DISTINCT player_id) /
         (SELECT COUNT(DISTINCT player_id) FROM Activity),
         2
     ) AS fraction
@@ -438,6 +474,8 @@ WHERE (player_id, event_date) IN
     FROM Activity
     GROUP BY player_id
 );
+
+
 ```
 [2356. Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher)
 ```sql
