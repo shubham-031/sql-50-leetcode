@@ -614,13 +614,28 @@ HAVING COUNT(DISTINCT product_key) =
 [1731. The Number of Employees Which Report to Each Employee
 ](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/)
 
+1️⃣ Question Translate
+
+👉 प्रत्येक Manager साठी:
+
+किती Employees त्याला report करतात?
+त्या Employees चं Average Age किती आहे?
+
 ```sql
-SELECT e1.employee_id, e1.name, COUNT(e2.employee_id) reports_count, ROUND(AVG(e2.age)) average_age 
-FROM Employees e1, Employees e2
-WHERE e1.employee_id = e2.reports_to
-GROUP BY e1.employee_id
-HAVING reports_count > 0
-ORDER BY e1.employee_id
+SELECT
+    a.employee_id,
+    a.name,
+    COUNT(b.employee_id) AS reports_count,
+    ROUND(AVG(b.age)) AS average_age
+FROM Employees AS a
+JOIN Employees AS b
+ON a.employee_id = b.reports_to
+GROUP BY
+    a.employee_id,
+    a.name
+ORDER BY
+    a.employee_id;
+    
 ```
 [1789. Primary Department for Each Employee
 ](https://leetcode.com/problems/primary-department-for-each-employee/?envType=study-plan-v2&envId=top-sql-50)
