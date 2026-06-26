@@ -478,10 +478,20 @@ WHERE (player_id, event_date) IN
 
 ```
 [2356. Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher)
+
+
+1️⃣ Question Translate
+
+👉 प्रत्येक Teacher किती वेगवेगळे (Unique) Subjects शिकवतो ते काढा.
+
+⚠️ Department मोजायचा नाही.
+
 ```sql
-SELECT teacher_id, COUNT(DISTINCT subject_id) cnt
+SELECT teacher_id, 
+COUNT(DISTINCT subject_id) cnt
 FROM Teacher
 GROUP BY teacher_id
+
 ```
 
 [1141. User Activity for the Past 30 Days I](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/)
