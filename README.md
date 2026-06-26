@@ -123,23 +123,25 @@ Question हे नाही विचारत:
 
 
 ```sql
-SELECT
-    s.student_id,
-    s.student_name,
-    sub.subject_name,
-    COUNT(e.student_id) AS attended_exams
-FROM Students s
-CROSS JOIN Subjects sub
-LEFT JOIN Examinations e
-ON s.student_id = e.student_id
-AND sub.subject_name = e.subject_name
-GROUP BY
-    s.student_id,
-    s.student_name,
-    sub.subject_name
-ORDER BY
-    s.student_id,
-    sub.subject_name;
+
+SELECT a.student_id, 
+a.student_name, 
+b.subject_name,
+ COUNT(c.student_id) AS attended_exams
+
+FROM  Students AS a
+CROSS JOIN Subjects  AS b
+LEFT JOIN Examinations AS c
+ON a.student_id = c.student_id
+AND b.subject_name = c.subject_name
+GROUP BY 
+a.student_id ,
+a.student_name ,
+b.subject_name 
+
+ORDER BY 
+a.student_id,
+b.subject_name;
 ```
 [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports)
 ```sql
