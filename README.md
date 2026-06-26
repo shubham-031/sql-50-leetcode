@@ -82,14 +82,16 @@ AND SUBDATE(w1.recordDate, 1) = w2.recordDate
 
 [1661 - Average Time of Process per Machine](https://leetcode.com/problems/average-time-of-process-per-machine/)
 ```sql
-SELECT machine_id, ROUND(AVG(end - start), 3) AS processing_time
-FROM 
-(SELECT machine_id, process_id, 
-    MAX(CASE WHEN activity_type = 'start' THEN timestamp END) AS start,
-    MAX(CASE WHEN activity_type = 'end' THEN timestamp END) AS end
- FROM Activity 
-  GROUP BY machine_id, process_id) AS subq
-GROUP BY machine_id
+select 
+a.machine_id, 
+ROUND(AVG(b.timestamp-a.timestamp), 3) AS processing_time
+from Activity a
+JOIN Activity b
+ON a.machine_id = b.machine_id
+AND a.process_id = b.process_id
+WHERE a.activity_type = "start"
+AND b.activity_type = "end"
+Group BY machine_id;
 ```
 
 [577 - Employee Bonus](https://leetcode.com/problems/employee-bonus/solutions/)
