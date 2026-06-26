@@ -515,16 +515,33 @@ GROUP BY activity_date;
 
 [1070. Product Sales Analysis III
 ](https://leetcode.com/problems/product-sales-analysis-iii/)
+
+
+1️⃣ Question Translate
+
+👉 प्रत्येक Product चा First Sale Year शोधा.
+
+👉 त्या First Year मधील Sale ची quantity आणि price द्या.
+
+⚠️ सगळ्या Sales नाहीत, फक्त First Year च्या Sales.
+
 ```sql
-SELECT s.product_id, s.year AS first_year, s.quantity, s.price
-FROM Sales s
-JOIN (
-  SELECT product_id, MIN(year) AS year 
-  FROM sales 
-  GROUP BY product_id
-  ) p
-ON s.product_id = p.product_id
-AND s.year = p.year
+SELECT
+    a.product_id,
+    a.year AS first_year,
+    a.quantity,
+    a.price
+FROM Sales AS a
+JOIN
+(
+    SELECT
+        product_id,
+        MIN(year) AS year
+    FROM Sales
+    GROUP BY product_id
+) AS b
+ON a.product_id = b.product_id
+AND a.year = b.year;
 
 -- OR
 WITH first_year_sales AS (
