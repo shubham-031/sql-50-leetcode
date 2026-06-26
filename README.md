@@ -199,13 +199,22 @@ GROUP BY a.user_id ;
 ```
 
 [620. Not Boring Movies](https://leetcode.com/problems/not-boring-movies)
+
+1️⃣ Question Translate
+
+👉 Odd ID असलेले movies घ्या.
+
+👉 Description = "boring" नसावा.
+
+👉 Rating descending मध्ये sort करा.
+
 ```sql
 -- odd id, "boring", rating desc
 SELECT *
 FROM Cinema
-WHERE id % 2 <> 0 
-AND description <> "boring"
-ORDER BY rating DESC
+WHERE id % 2 != 0
+AND description != 'boring'
+ORDER BY rating DESC;
 ```
 
 [1251. Average Selling Price](https://leetcode.com/problems/average-selling-price/)
