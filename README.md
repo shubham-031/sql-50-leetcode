@@ -260,13 +260,24 @@ GROUP BY project_id
 ```
 
 [1633. Percentage of Users Attended a Contest](https://leetcode.com/problems/percentage-of-users-attended-a-contest)
+
+1️⃣ Question Translate
+
+👉 प्रत्येक Contest मध्ये किती % Users register झाले ते काढा.
+
+Formula
+
+Percentage  = Registered Users × 100 / Total Users
+
 ```sql
 -- % desc, contest_id asc, round 2
-SELECT r.contest_id,
-       ROUND(COUNT(DISTINCT r.user_id) * 100 / (SELECT COUNT(DISTINCT user_id) FROM Users), 2) AS percentage
-FROM Register r
-GROUP BY r.contest_id
-ORDER BY percentage DESC, r.contest_id ASC;
+SELECT 
+       contest_id,
+       ROUND(COUNT(b.user_id)* 100/
+        (SELECT COUNT(*) from Users), 2) AS percentage
+FROM Register AS b
+GROUP BY b.contest_id
+ORDER BY percentage DESC, b.contest_id ASC; 
 ```
 
 [1211 Queries Quality and Percentage](https://leetcode.com/problems/queries-quality-and-percentage)
