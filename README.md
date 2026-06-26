@@ -1,6 +1,6 @@
 # SQL 50 - LeetCode
 Solutions for [SQL 50 Study Plan](https://leetcode.com/studyplan/top-sql-50/) on LeetCode
-
+1.Outer Query + Subquery Pattern LeetCode SQL
 ---
 
 [1757 - Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/)
@@ -576,15 +576,22 @@ ORDER BY user_id;
 ```
 
 [619. Biggest Single Number](https://leetcode.com/problems/biggest-single-number/)
+
+1️⃣ Question Translate
+
+👉 जो Number फक्त एकदाच आला आहे (Single Number), त्यांच्यामधला सर्वात मोठा Number द्या.
+
 ```sql
-SELECT COALESCE(
-  (SELECT num
-  FROM MyNumbers
-  GROUP BY num
-  HAVING COUNT(num) = 1
-  ORDER BY num DESC
-  LIMIT 1), null) 
-  AS num
+SELECT
+    MAX(num) AS num
+FROM
+(
+    SELECT
+        num
+    FROM MyNumbers
+    GROUP BY num
+    HAVING COUNT(*) = 1
+) AS a;
 ```
 
 [1045. Customers Who Bought All Products](https://leetcode.com/problems/customers-who-bought-all-products/)
