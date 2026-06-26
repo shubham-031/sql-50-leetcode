@@ -282,15 +282,40 @@ ORDER BY percentage DESC, b.contest_id ASC;
 
 [1211 Queries Quality and Percentage](https://leetcode.com/problems/queries-quality-and-percentage)
 
+
+1️⃣ Question Translate
+
+प्रत्येक query_name साठी 2 गोष्टी काढायच्या आहेत.
+
+Quality
+Poor Query Percentage
+2️⃣ Formula 1 : Quality
+
+Question मध्ये Formula दिला आहे.
+
+Quality = AVG(rating / position)
+3️⃣ Formula 2 : Poor Query %
+
+Poor म्हणजे
+
+rating < 3
+
+
 ```sql
 --quality - avg(rating/position), poor query % - %(rating < 3), round 2
+
+
 SELECT query_name, 
-    ROUND(AVG(rating/position), 2) AS quality, 
-    ROUND(SUM(IF(rating < 3, 1, 0)) * 100/ COUNT(rating), 2) AS poor_query_percentage
-FROM Queries
-GROUP BY query_name
+ ROUND(AVG(rating/position),2) AS quality,
+ ROUND(SUM(IF(rating < 3, 1, 0)) * 100 / Count(rating), 2) AS poor_query_percentage
+
+ FROM Queries
+ GROUP BY query_name;
+ 
+
 
 -- OR
+
 SELECT query_name, 
     ROUND(AVG(rating/position), 2) AS quality, 
     ROUND(SUM(
