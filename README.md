@@ -45,9 +45,9 @@ WHERE length(content) > 15
 [1378 - Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier)
 ```sql
 SELECT unique_id, name
-FROM Employees e
-LEFT JOIN EmployeeUNI eu
-ON e.id = eu.id
+FROM Employees AS a
+LEFT JOIN EmployeeUNI AS b
+ON a.id = b.id
 ```
 
 [1068 - Product Sales Analysis I](https://leetcode.com/problems/product-sales-analysis-i/)
