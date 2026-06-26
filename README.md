@@ -243,6 +243,12 @@ GROUP BY a.product_id;
 ```
 
 [1075. Project Employees I](https://leetcode.com/problems/project-employees-i)
+
+
+1️⃣ Question Translate
+
+👉 प्रत्येक Project वर काम करणाऱ्या Employees चा Average Experience काढा.
+
 ```sql
 -- avg(exp_yr), round 2, by project
 SELECT project_id, ROUND(AVG(experience_years), 2) average_years
