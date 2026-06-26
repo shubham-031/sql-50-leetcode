@@ -561,11 +561,18 @@ HAVING COUNT(student) >= 5;
 ```
 
 [1729. Find Followers Count](https://leetcode.com/problems/find-followers-count/)
+
+1️⃣ Question Translate
+
+👉 प्रत्येक User चे किती Followers आहेत ते काढा.
+
 ```sql
-SELECT user_id, COUNT(DISTINCT follower_id) AS followers_count
+SELECT
+    user_id,
+    COUNT(follower_id) AS followers_count
 FROM Followers
 GROUP BY user_id
-ORDER BY user_id ASC
+ORDER BY user_id;
 ```
 
 [619. Biggest Single Number](https://leetcode.com/problems/biggest-single-number/)
