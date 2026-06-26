@@ -411,19 +411,33 @@ WHERE temp.od = 1
 ```
 
 [550. Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/)
+
+
+1️⃣ Question Translate
+
+👉 प्रत्येक Player चा First Login शोधा.
+
+👉 तो Player दुसऱ्या दिवशी (Next Day) परत Login झाला का?
+
+👉 अशा Players ची Fraction काढा.
+
+
 ```sql
-WITH login_date AS (SELECT player_id, MIN(event_date) AS first_login
+SELECT
+    ROUND(
+        COUNT(*) /
+        (SELECT COUNT(DISTINCT player_id) FROM Activity),
+        2
+    ) AS fraction
 FROM Activity
-GROUP BY player_id),
-
-recent_login AS (
-SELECT *, DATE_ADD(first_login, INTERVAL 1 DAY) AS next_day
-FROM login_date)
-
-SELECT ROUND((SELECT COUNT(DISTINCT(player_id))
-FROM Activity
-WHERE (player_id, event_date) IN 
-(SELECT player_id, next_day FROM recent_login)) / (SELECT COUNT(DISTINCT player_id) FROM Activity), 2) AS fraction
+WHERE (player_id, event_date) IN
+(
+    SELECT
+        player_id,
+        DATE_ADD(MIN(event_date), INTERVAL 1 DAY)
+    FROM Activity
+    GROUP BY player_id
+);
 ```
 [2356. Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher)
 ```sql
