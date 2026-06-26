@@ -109,6 +109,19 @@ OR bonus IS NULL
 ```
 
 [1280 - Students and Examinations](https://leetcode.com/problems/students-and-examinations/)
+
+
+🎯 Question एका वाक्यात
+
+Question हे नाही विचारत:
+
+कोणत्या Students ने Exam दिला?
+
+तो विचारतो:
+
+प्रत्येक Student ने प्रत्येक Subject चा Exam किती वेळा दिला?
+
+
 ```sql
 SELECT
     s.student_id,
