@@ -332,15 +332,27 @@ GROUP BY query_name
 ```
 
 [1193. Monthly Transactions I](https://leetcode.com/problems/monthly-transactions-i/)
+
+-- 1️⃣ Question Translate
+
+-- प्रत्येक Month + Country साठी काढा:
+
+-- Total Transactions
+-- Approved Transactions
+-- Total Amount
+-- Approved Amount
+
 ```sql
--- month, country, count(trans), total(amt), count(approved_trans), total(amt)
-SELECT DATE_FORMAT(trans_date, '%Y-%m') month, country, 
-        COUNT(state) trans_count, 
-        SUM(IF(state = 'approved', 1, 0)) approved_count, 
-        SUM(amount) trans_total_amount,
-        SUM(IF(state = 'approved', amount, 0)) approved_total_amount
+
+SELECT 
+ DATE_FORMAT(trans_date, '%Y-%m') AS month,
+country, 
+COUNT(state) AS trans_count,
+SUM(IF(state="approved", 1,0)) AS approved_count,
+SUM(amount) AS trans_total_amount,
+SUM(IF(state= "approved", amount, 0)) AS approved_total_amount
+
 FROM Transactions
-GROUP BY 1, 2
 
 -- OR
 SELECT DATE_FORMAT(trans_date, '%Y-%m') month, country, 
