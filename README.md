@@ -595,14 +595,21 @@ FROM
 ```
 
 [1045. Customers Who Bought All Products](https://leetcode.com/problems/customers-who-bought-all-products/)
+
+1️⃣ Question Translate
+
+👉 ज्या Customer ने Product Table मधले सर्व Products विकत घेतले आहेत, त्यांचा customer_id द्या.
+
 ```sql
-SELECT customer_id
+SELECT
+    customer_id
 FROM Customer
 GROUP BY customer_id
-HAVING COUNT(DISTINCT product_key) = (
-  SELECT COUNT(product_key)
-  FROM Product
-)
+HAVING COUNT(DISTINCT product_key) =
+(
+    SELECT COUNT(*)
+    FROM Product
+);
 ```
 [1731. The Number of Employees Which Report to Each Employee
 ](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/)
