@@ -179,8 +179,11 @@ Question म्हणतो:
 
 ⭐ Revision Formula
 SUM(condition)   → Count TRUE rows
+
 COUNT(column)    → Count total rows
+
 IFNULL(x,0)      → If x is NULL, return 0
+
 ROUND(x,2)       → Round to 2 decimal places
 
 One-line memory trick:
