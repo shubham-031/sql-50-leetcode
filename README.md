@@ -251,10 +251,11 @@ GROUP BY a.product_id;
 
 ```sql
 -- avg(exp_yr), round 2, by project
-SELECT project_id, ROUND(AVG(experience_years), 2) average_years
-FROM Project p 
-LEFT JOIN Employee e
-ON p.employee_id = e.employee_id
+SELECT project_id,
+ROUND(AVG(experience_years),2) AS average_years
+from Project AS a 
+LEFT JOIN Employee AS b
+ON a.employee_id = b.employee_id
 GROUP BY project_id
 ```
 
