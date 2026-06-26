@@ -495,11 +495,22 @@ GROUP BY teacher_id
 ```
 
 [1141. User Activity for the Past 30 Days I](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/)
+
+
+1️⃣ Question Translate
+
+👉 2019-07-27 पर्यंतच्या मागील 30 दिवसांतील प्रत्येक दिवसासाठी किती Unique Users active होते ते काढा.
+
+⚠️ User ने एका दिवशी 10 activities केल्या तरी 1 active user म्हणूनच मोजायचा.
+
+
 ```sql
-SELECT activity_date as day, COUNT(DISTINCT user_id) AS active_users
+SELECT
+    activity_date AS day,
+    COUNT(DISTINCT user_id) AS active_users
 FROM Activity
-WHERE activity_date BETWEEN DATE_SUB('2019-07-27', INTERVAL 29 DAY) AND '2019-07-27'
-GROUP BY activity_date
+WHERE activity_date BETWEEN '2019-06-28' AND '2019-07-27'
+GROUP BY activity_date;
 ```
 
 [1070. Product Sales Analysis III
