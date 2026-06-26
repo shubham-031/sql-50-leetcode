@@ -367,16 +367,40 @@ GROUP BY 1, 2
 ```
 
 [1174. Immediate Food Delivery II](https://leetcode.com/problems/immediate-food-delivery-ii/)
+
+
+-- 1️⃣ Question Translate
+
+-- 👉 प्रत्येक Customer चा पहिला Order शोधा.
+
+-- 👉 त्या पहिल्या Order पैकी किती Immediate आहेत त्याची Percentage काढा.
+
+-- 2️⃣ Immediate म्हणजे काय?
+-- order_date == customer_pref_delivery_date
+
+-- उदा.
+
+-- Order Date	Preferred Date	Type
+-- 1 Aug	1 Aug	✅ Immediate
+-- 1 Aug	2 Aug	❌ Schedule
+
 ```sql
+
+
 SELECT
-    ROUND((COUNT(CASE WHEN d.order_date = d.customer_pref_delivery_date THEN 1 END) / COUNT(*)) * 100, 2)  immediate_percentage
-FROM Delivery d
-WHERE d.order_date = (
-    SELECT
-    MIN(order_date)
-    FROM Delivery
-    WHERE customer_id = d.customer_id
-    );
+ROUND(
+AVG(order_date = customer_pref_delivery_date) * 100,
+2
+) AS immediate_percentage
+FROM Delivery
+WHERE (customer_id, order_date) IN
+(
+SELECT
+customer_id,
+MIN(order_date)
+FROM Delivery
+GROUP BY customer_id
+);
 
 -- OR
 SELECT ROUND(AVG(temp.order_date=temp.customer_pref_delivery_date) * 100, 2) immediate_percentage
