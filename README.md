@@ -53,9 +53,9 @@ ON e.id = eu.id
 [1068 - Product Sales Analysis I](https://leetcode.com/problems/product-sales-analysis-i/)
 ```sql
 SELECT product_name, year, price
-FROM Sales s
-LEFT JOIN Product p
-ON s.product_id = p.product_id
+FROM Sales AS a
+LEFT JOIN Product  AS b
+ON a.product_id = b.product_id
 ```
 
 [1581 - Customer Who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/)
