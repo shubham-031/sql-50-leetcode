@@ -544,13 +544,20 @@ ON a.product_id = b.product_id
 AND a.year = b.year;
 
 
-
+```
 [596. Classes More Than 5 Students](https://leetcode.com/problems/classes-more-than-5-students/)
+
+
+1️⃣ Question Translate
+
+👉 ज्या Class मध्ये 5 किंवा त्यापेक्षा जास्त Students आहेत, त्या Class चे नाव द्या.
+
 ```sql
-SELECT class
+SELECT
+    class
 FROM Courses
 GROUP BY class
-HAVING COUNT(student) >= 5
+HAVING COUNT(student) >= 5;
 ```
 
 [1729. Find Followers Count](https://leetcode.com/problems/find-followers-count/)
