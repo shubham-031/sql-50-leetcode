@@ -169,19 +169,33 @@ HAVING COUNT(*) >= 5
 ```
 
 [1934. Confirmation Rate](https://leetcode.com/problems/confirmation-rate/)
+1️⃣ Question Translate
+
+Question म्हणतो:
+
+👉 प्रत्येक User चा Confirmation Rate काढा.
+
+⭐ Revision Formula
+SUM(condition)   → Count TRUE rows
+COUNT(column)    → Count total rows
+IFNULL(x,0)      → If x is NULL, return 0
+ROUND(x,2)       → Round to 2 decimal places
+
+One-line memory trick:
+
+Confirmation Rate = Confirmed Count / Total Count
+                  = SUM(action='confirmed') / COUNT(action)
+
+                  
 ```sql
-SELECT 
-  s.user_id, 
-  ROUND(
-    COALESCE(
-      SUM(
-        CASE WHEN ACTION = 'confirmed' THEN 1 END
-      ) / COUNT(*), 0),2) 
-  AS confirmation_rate 
-FROM Signups s 
-LEFT JOIN Confirmations c 
-ON s.user_id = c.user_id 
-GROUP BY s.user_id;  
+
+SELECT a.user_id ,
+ROUND (IFNULL(SUM(b.action ="confirmed")/ COUNT(b.action),0), 2)
+AS confirmation_rate 
+FROM Signups AS a 
+LEFT JOIN Confirmations AS b
+ON a.user_id = b.user_id
+GROUP BY a.user_id ;
 ```
 
 [620. Not Boring Movies](https://leetcode.com/problems/not-boring-movies)
