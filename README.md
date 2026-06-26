@@ -144,6 +144,11 @@ a.student_id,
 b.subject_name;
 ```
 [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports)
+
+1️⃣ Question Translate
+
+👉 ज्या Manager कडे किमान 5 Employees directly report करतात, त्या Manager चे नाव द्या.
+
 ```sql
 SELECT name 
 FROM Employee 
