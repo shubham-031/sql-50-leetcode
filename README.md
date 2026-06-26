@@ -169,11 +169,13 @@ HAVING COUNT(*) >= 5
 ```
 
 [1934. Confirmation Rate](https://leetcode.com/problems/confirmation-rate/)
+
 1️⃣ Question Translate
 
 Question म्हणतो:
 
 👉 प्रत्येक User चा Confirmation Rate काढा.
+
 
 ⭐ Revision Formula
 SUM(condition)   → Count TRUE rows
@@ -222,6 +224,7 @@ ORDER BY rating DESC;
 1️⃣ Question Translate
 
 👉 प्रत्येक Product चा Average Selling Price काढा.
+
 
 Formula:
 
