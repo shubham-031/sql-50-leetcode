@@ -218,15 +218,28 @@ ORDER BY rating DESC;
 ```
 
 [1251. Average Selling Price](https://leetcode.com/problems/average-selling-price/)
+
+1️⃣ Question Translate
+
+👉 प्रत्येक Product चा Average Selling Price काढा.
+
+Formula:
+
+Average Price = Total Amount / Total Units Sold
+
 ```sql
 -- avg(selling), round 2
-SELECT p.product_id, 
-  ROUND(SUM(price * units) / SUM(units), 2) AS average_price
-FROM Prices p
-LEFT JOIN UnitsSold s
-ON p.product_id = s.product_id
-AND purchase_date BETWEEN start_date AND end_date
-GROUP BY p.product_id
+SELECT
+    a.product_id,
+    ROUND(
+        IFNULL(SUM(a.price * b.units) / SUM(b.units), 0),
+        2
+    ) AS average_price
+FROM Prices AS a
+LEFT JOIN UnitsSold AS b
+ON a.product_id = b.product_id
+AND b.purchase_date BETWEEN a.start_date AND a.end_date
+GROUP BY a.product_id;
 ```
 
 [1075. Project Employees I](https://leetcode.com/problems/project-employees-i)
