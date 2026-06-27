@@ -1295,11 +1295,31 @@ WHERE rnk <= 3;
 
 
 [1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table)
+
+🧠 Question Translate
+
+Name असा Convert करा की:
+
+✅ पहिलं अक्षर Uppercase
+✅ बाकीची सर्व अक्षरे Lowercase
+
+उदा.
+
+aLice  → Alice
+
+bOB    → Bob
+
+JOHN   → John
+
+maRY   → Mary
+
 ```sql
-SELECT user_id, CONCAT(UPPER(LEFT(name, 1)), LOWER(RIGHT(name, LENGTH(name)-1))) AS name
+SELECT user_id, 
+CONCAT(UPPER(LEFT(name, 1)), LOWER(RIGHT(name, LENGTH(name)-1))) AS name
 FROM Users
 ORDER BY user_id
 ```
+
 
 [1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition)
 ```sql
