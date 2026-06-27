@@ -1000,6 +1000,45 @@ ORDER BY sell_date
 
 [1341. Movie Rating](https://leetcode.com/problems/movie-rating/)
 
+User ने किती Movies Rate केले?
+
+MovieRating Table
+
+user	movie
+Daniel	Avengers
+Daniel	Frozen 2
+Daniel	Joker
+Monica	Avengers
+Monica	Frozen 2
+Monica	Joker
+Maria	Avengers
+Maria	Frozen 2
+James	Avengers
+
+Count करू.
+
+User	Movies Rated
+Daniel	3
+Monica	3
+Maria	2
+James	1
+
+Maximum = 3
+
+पण दोन जण आहेत.
+
+Daniel
+Monica
+
+Question म्हणतो
+
+Tie?
+
+↓
+
+Alphabetically Smaller
+Daniel ✅
+
 ```sql
 (SELECT name AS results
 FROM Users u
