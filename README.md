@@ -843,17 +843,73 @@ LIMIT 1;
 ```
 
 [1907. Count Salary Categories](https://leetcode.com/problems/count-salary-categories/)
+
+⚠️ Output मध्ये तिन्ही Categories हव्यात, जरी एखाद्या Category मध्ये 0 Accounts असले तरी.
+
+1️⃣ Question Translate
+
+प्रत्येक Account ला Salary Category मध्ये टाका.
+
+Rules:
+
+income < 20000
+
+↓
+
+Low Salary
+20000 <= income <= 50000
+
+↓
+
+Average Salary
+income > 50000
+
+↓
+
+High Salary
 ```sql
 
-SELECT 'Low Salary' AS category, SUM(IF(income<20000,1,0)) AS accounts_count 
+SELECT 'Low Salary' AS category, 
+SUM(IF(income<20000,1,0)) AS accounts_count 
 FROM Accounts
+
 UNION
-SELECT 'Average Salary' AS category, SUM(IF(income>=20000 AND income<=50000,1,0)) AS accounts_count 
+
+SELECT 'Average Salary' AS category,
+SUM(IF(income>=20000 AND income<=50000,1,0)) AS accounts_count 
 FROM Accounts
+
 UNION
-SELECT 'High Salary' AS category, SUM(IF(income>50000,1,0)) AS accounts_count 
+
+SELECT 'High Salary' AS category, 
+SUM(IF(income>50000,1,0)) AS accounts_count 
 FROM Accounts
 ```
+OR 
+
+```
+SELECT
+    'Low Salary' AS category,
+    COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income < 20000
+
+UNION ALL
+
+SELECT
+    'Average Salary',
+    COUNT(*)
+FROM Accounts
+WHERE income BETWEEN 20000 AND 50000
+
+UNION ALL
+
+SELECT
+    'High Salary',
+    COUNT(*)
+FROM Accounts
+WHERE income > 50000;
+
 [626. Exchange Seats](https://leetcode.com/problems/exchange-seats/)
 ```sql
 -- id, student
