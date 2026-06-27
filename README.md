@@ -1259,21 +1259,38 @@ AND (lat,lon) IN
 ```
 
 [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries)
+
+Question DENSE_RANK() Pattern आहे.
+
+⚠️ लक्षात ठेव:
+प्रश्नात Top 3 Employees नाहीत, तर Top 3 Unique Salaries आहेत.
+
+म्हणून ROW_NUMBER() नाही, DENSE_RANK() वापरायचं.
+
+🧠 Question Translate
+
+प्रत्येक Department मध्ये
+
+Top 3 Unique Salaries
+
+असलेल्या सर्व Employees काढा.
 ```sql
-WITH RankedSalaries AS 
-(SELECT 
-    e.Id AS employee_id,
-    e.name AS employee,
-    e.salary,
-    e.departmentId,
-    DENSE_RANK() OVER (PARTITION BY e.departmentId ORDER BY e.salary DESC) AS salary_rank 
-FROM Employee e)
-SELECT d.name AS Department,
-r.employee,
-r.salary
-FROM Department d
-JOIN RankedSalaries r ON r.departmentId = d.id
-WHERE r.salary_rank <=3;
+SELECT
+    b.name AS Department,
+    a.name AS Employee,
+    a.salary AS Salary
+FROM
+(
+    SELECT *,
+           DENSE_RANK() OVER(
+               PARTITION BY departmentId
+               ORDER BY salary DESC
+           ) AS rnk
+    FROM Employee
+) AS a
+JOIN Department b
+ON a.departmentId = b.id
+WHERE rnk <= 3;
 ```
 
 
