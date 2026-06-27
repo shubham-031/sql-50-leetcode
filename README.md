@@ -912,6 +912,17 @@ WHERE income > 50000;
 
  ```
  [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company)
+
+ 1️⃣ Question Translate
+
+असे Employees शोधा ज्यांचे:
+
+✅ Salary < 30000
+✅ Manager कंपनी सोडून गेला आहे.
+
+Manager कंपनी सोडून गेला म्हणजे
+
+👉 त्याचा manager_id Employees Table मध्ये नाही.
 ```sql
 SELECT employee_id
 FROM Employees
