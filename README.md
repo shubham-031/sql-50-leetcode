@@ -910,6 +910,7 @@ SELECT
 FROM Accounts
 WHERE income > 50000;
 
+ ```
 [626. Exchange Seats](https://leetcode.com/problems/exchange-seats/)
 ```sql
 -- id, student
