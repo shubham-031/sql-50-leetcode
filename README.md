@@ -1373,6 +1373,20 @@ AND b.Email = a.Email
 
 [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary)
 
+🧠 Question Translate
+
+Table मधून
+
+Duplicate Salary काढा.
+Salary Descending मध्ये Sort करा.
+दुसरी Highest Salary Return करा.
+जर दुसरी Salary नसेल तर NULL Return करा.
+
+
+🧠 OFFSET म्हणजे काय?
+
+OFFSET = सुरुवातीच्या किती Rows Skip करायच्या.
+
 🧠 Interview Trick
 
 जर Question मध्ये दिसलं:
