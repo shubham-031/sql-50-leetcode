@@ -1322,6 +1322,28 @@ ORDER BY user_id
 
 
 [1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition)
+
+🧠 Question Translate
+
+conditions मध्ये बरेच Codes आहेत.
+
+उदा.
+
+DIAB100 MYOP COUGH
+
+आपल्याला असे Patients शोधायचे आहेत ज्यांच्याकडे
+
+DIAB1...
+
+ने सुरू होणारा Code आहे.
+
+उदा.
+
+✅ DIAB100
+
+✅ DIAB123
+
+❌ DIAB201
 ```sql
 SELECT patient_id, patient_name, conditions 
 FROM patients 
