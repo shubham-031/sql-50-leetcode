@@ -1103,20 +1103,114 @@ WHERE visited_on >= first_day + 6;
 
 [602. Friend Requests II: Who Has the Most Friends](https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends)
 
+
+🧠 Question Translate
+
+प्रत्येक Accepted Friend Request मध्ये
+
+requester_id  ↔ accepter_id
+
+दोघेही Friends आहेत.
+
+म्हणून
+
+प्रत्येक Person चे Total Friends मोजा.
+
+शेवटी
+
+ज्याचे Friends सर्वात जास्त आहेत तो Person Return करा.
+
+Step 1 : Input
+Requester	Accepter
+1	2
+1	3
+2	3
+3	4
+Step 2 : Friendship दोन्ही बाजूंनी Count करायची
+
+Friend List
+
+1 ↔ 2
+
+1 ↔ 3
+
+2 ↔ 3
+
+3 ↔ 4
+
+म्हणून
+
+Person 1
+
+Friends
+
+2
+
+3
+
+Count =2
+
+Person2
+
+Friends
+
+1
+
+3
+
+Count =2
+
+Person3
+
+Friends
+
+1
+
+2
+
+4
+
+Count =3
+
+Person4
+
+Friend
+
+3
+
+Count =1
+
+Output
+
+id	friends
+1	2
+2	2
+3	3
+4	1
+
+Maximum
+
+Person3
+
 ```sql
 -- `union` selects only unique vals, so we use `union all` here
 
-WITH CTE AS (
-    SELECT requester_id AS id FROM RequestAccepted
-    UNION ALL
-    SELECT accepter_id AS id FROM RequestAccepted
-)
+SELECT
+    id,
+    COUNT(id) AS num
+FROM
+(
+    SELECT requester_id AS id
+    FROM RequestAccepted
 
-SELECT id, COUNT(id) AS num
-FROM CTE
+    UNION ALL
+
+    SELECT accepter_id AS id
+    FROM RequestAccepted
+) AS a
 GROUP BY id
 ORDER BY num DESC
-LIMIT 1
+LIMIT 1;
 ```
 
 [585. Investments in 2016](https://leetcode.com/problems/investments-in-2016)
