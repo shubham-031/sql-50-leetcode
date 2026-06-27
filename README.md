@@ -689,25 +689,92 @@ HAVING COUNT(employee_id)=1
 
 [610. Triangle Judgement](https://leetcode.com/problems/triangle-judgement/)
 
+
+1️⃣ Question Translate
+
+👉 प्रत्येक Row साठी Check करा:
+
+हे 3 sides Triangle बनवू शकतात का?
+
+जर हो
+
+↓
+
+Yes
+
+नाही
+
+↓
+
+No
+2️⃣ Triangle Rule
+
+Triangle बनण्यासाठी
+
+तीनही Conditions True पाहिजेत.
+
+x + y > z
+
+x + z > y
+
+y + z > x
+
 ```sql
-SELECT x, y, z, 
-CASE WHEN x + y > z AND x + z > y AND y + z > x THEN 'Yes'
-ELSE 'No' END AS triangle
-FROM Triangle
+SELECT
+    x,
+    y,
+    z,
+    IF(
+        x + y > z
+        AND x + z > y
+        AND y + z > x,
+        'Yes',
+        'No'
+    ) AS triangle
+FROM Triangle;
 ```
 
 [180. Consecutive Numbers
 ](https://leetcode.com/problems/consecutive-numbers/)
+
+
+1️⃣ Question Translate
+
+👉 सलग (Consecutive) 3 वेळा आलेले Number शोधा.
+
+⚠️ फक्त 3 वेळा Number आला म्हणजे चालणार नाही.
+
+सलग (Continuous IDs) पाहिजेत.
+```
+PATTERN
+
+SELECT DISTINCT column
+FROM
+(
+    SELECT
+        column,
+        LAG(column) OVER(ORDER BY id_column) AS prev,
+        LEAD(column) OVER(ORDER BY id_column) AS next
+    FROM table
+) AS t
+WHERE column = prev
+AND column = next;
+
+
 ```sql
-WITH cte AS (
-  SELECT id, num, 
-    LEAD(num) OVER (ORDER BY id) AS next, 
-    LAG(num) OVER (ORDER BY id) AS prev
-  FROM Logs
-) 
-SELECT DISTINCT(num) AS ConsecutiveNums
-FROM cte
-WHERE num = next AND num = prev
+SELECT DISTINCT
+    num AS ConsecutiveNums
+FROM
+(
+    SELECT
+        id,
+        num,
+        LEAD(num) OVER(ORDER BY id) AS next,
+        LAG(num) OVER(ORDER BY id) AS prev
+    FROM Logs
+) AS a
+WHERE num = next
+AND num = prev;
 ```
 
 
