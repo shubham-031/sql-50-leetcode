@@ -639,17 +639,33 @@ ORDER BY
 ```
 [1789. Primary Department for Each Employee
 ](https://leetcode.com/problems/primary-department-for-each-employee/?envType=study-plan-v2&envId=top-sql-50)
-```sql
-SELECT employee_id, department_id
-FROM Employee 
-WHERE primary_flag = 'Y'
-UNION
-SELECT employee_id, department_id
-FROM Employee
-GROUP BY employee_id
-HAVING COUNT(employee_id)=1
 
--- OR
+
+Question काय म्हणतो?
+
+प्रत्येक Employee साठी एकच Department Return करायचा.
+
+पण कोणता?
+
+Rule आहेत.
+
+Rule 1
+
+जर
+
+primary_flag = 'Y'
+
+असेल
+
+👉 तो Department Return कर.
+
+Rule 2
+
+जर Employee फक्त एका Department मध्ये असेल
+
+👉 तोच Department Return कर.
+
+```sql
 SELECT employee_id,department_id
 FROM Employee
 WHERE primary_flag = 'Y' OR employee_id IN
@@ -658,6 +674,17 @@ WHERE primary_flag = 'Y' OR employee_id IN
      GROUP BY employee_id
      HAVING COUNT(department_id) = 1
     )
+
+-- OR
+
+SELECT employee_id, department_id
+FROM Employee 
+WHERE primary_flag = 'Y'
+UNION
+SELECT employee_id, department_id
+FROM Employee
+GROUP BY employee_id
+HAVING COUNT(employee_id)=1
 ```
 
 [610. Triangle Judgement](https://leetcode.com/problems/triangle-judgement/)
