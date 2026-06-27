@@ -1352,11 +1352,23 @@ OR conditions LIKE 'DIAB1%'
 ```
 
 [196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails)
+
+
+🧠 Question Translate
+
+जर एकाच Email चे अनेक Records असतील,
+
+तर
+
+✅ Smallest id ठेवायचा
+
+❌ बाकीचे Delete करायचे.
+
 ```sql
-DELETE p
-FROM Person p, Person q
-WHERE p.id > q.id
-AND q.Email = p.Email
+DELETE a
+FROM Person a, Person b
+WHERE a.id > b.id
+AND b.Email = a.Email
 ```
 
 [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary)
