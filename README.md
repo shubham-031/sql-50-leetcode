@@ -887,7 +887,7 @@ FROM Accounts
 ```
 OR 
 
-```
+```sql
 SELECT
     'Low Salary' AS category,
     COUNT(*) AS accounts_count
