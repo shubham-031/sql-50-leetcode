@@ -1451,10 +1451,54 @@ GROUP BY a.product_id
 HAVING SUM(b.unit) >= 100;
 ```
 [1517. Find Users With Valid E-Mails](https://leetcode.com/problems/find-users-with-valid-e-mails)
+
+🧠 Question Translate
+
+Valid Email साठी 3 Rules आहेत.
+
+Rule 1
+
+पहिलं Character
+
+Letter (A-Z / a-z)
+
+असायला पाहिजे.
+
+✅
+
+abc...
+
+❌
+
+.abc
+
+1abc
+
+_abc
+Rule 2
+
+पहिल्या Letter नंतर
+
+हे Characters चालतील.
+
+A-Z
+a-z
+0-9
+_
+.
+-
+Rule 3
+
+शेवटी
+
+@leetcode.com
+
+असले पाहिजे.
 ```sql
 SELECT *
 FROM Users
-WHERE mail REGEXP '^[A-Za-z][A-Za-z0-9_\.\-]*@leetcode\\.com$'
+WHERE mail REGEXP
+'^[A-Za-z][A-Za-z0-9_.-]*@leetcode\\.com$';
 ```
 
 
