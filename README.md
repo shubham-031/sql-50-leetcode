@@ -934,15 +934,43 @@ AND salary < 30000
 ORDER BY employee_id
 ```
 [626. Exchange Seats](https://leetcode.com/problems/exchange-seats/)
+
+1️⃣ Question Translate
+
+प्रत्येक 2 Students चे Seats Swap करा.
+
+1 ↔ 2
+
+3 ↔ 4
+
+5 ↔ 6
+
+पण
+
+जर शेवटी एकच Student उरला
+
+↓
+
+त्याला Swap करायचं नाही.
+
+SYNTAX --
+
+LEAD(column, offset, default) OVER(ORDER BY id)
+column → कोणता Column हवा? (student)
+offset → किती Row पुढे? (1)
+default → पुढची Row नसेल तर काय Return करायचं? (student)
 ```sql
 -- id, student
 -- swap every two consecutives
 -- num(students): odd? no swap for last one
 
-SELECT id, 
-CASE WHEN MOD(id,2)=0 THEN (LAG(student) OVER (ORDER BY id))
-ELSE (LEAD(student, 1, student) OVER (ORDER BY id))
-END AS 'Student'
+SELECT
+ id, 
+IF(
+    id % 2 != 0,
+    LEAD(student, 1, student) OVER (ORDER BY id),
+    LAG(student) OVER (ORDER BY id)
+) AS student
 FROM Seat
 ```
 
