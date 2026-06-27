@@ -1372,6 +1372,27 @@ AND b.Email = a.Email
 ```
 
 [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary)
+
+🧠 Interview Trick
+
+जर Question मध्ये दिसलं:
+
+Highest
+Second Highest
+Third Highest
+Nth Highest
+
+↓
+
+लगेच आठव:
+PATTERN --
+SELECT
+(
+    SELECT DISTINCT column
+    FROM table
+    ORDER BY column DESC
+    LIMIT 1 OFFSET N-1
+);
 ```sql
 SELECT
 (SELECT DISTINCT Salary 
