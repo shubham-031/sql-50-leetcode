@@ -1063,16 +1063,17 @@ LIMIT 1
 
 [1321. Restaurant Growth](https://leetcode.com/problems/restaurant-growth/)
 
--- pay: last 7 days (today inclusive) - avg.amt (round, 2)
+🧠 Question Translate
 
-SELECT visited_on, amount, ROUND(amount/7, 2) AS average_amount
-FROM (
-    SELECT DISTINCT visited_on,
-    SUM(amount) OVER(ORDER BY visited_on RANGE BETWEEN INTERVAL 6 DAY PRECEDING AND CURRENT ROW) AS amount,
-    MIN(visited_on) OVER() day_1
-    FROM Customer
-) t
-WHERE visited_on >= day_1+6;
+प्रत्येक दिवसासाठी
+
+आजचा दिवस + मागचे 6 दिवस
+
+=
+
+7 दिवसांचा Total Amount आणि Average Amount काढा.
+
+⚠️ एकाच दिवशी अनेक Customers असू शकतात (उदा. 2019-01-10 ला 2 Transactions आहेत), त्यामुळे आधी प्रत्येक दिवसाचा Total Amount काढावा लागतो.
 
 ```sql
 -- pay: last 7 days (today inclusive) - avg.amt (round, 2)
