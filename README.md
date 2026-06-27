@@ -974,29 +974,7 @@ IF(
 FROM Seat
 ```
 
-[1327. List the Products Ordered in a Period](https://leetcode.com/problems/list-the-products-ordered-in-a-period/)
-```sql
--- name, amt
--- >= 100 units, feb 2020
 
-SELECT p.product_name, SUM(o.unit) AS unit
-FROM Products p
-LEFT JOIN Orders o
-ON p.product_id = o.product_id
-WHERE DATE_FORMAT(order_date, '%Y-%m') = '2020-02'
-GROUP BY p.product_name
-HAVING SUM(o.unit) >= 100
-```
-
-[1484. Group Sold Products By The Date](https://leetcode.com/problems/group-sold-products-by-the-date/)
-```sql
-SELECT sell_date, 
-COUNT(DISTINCT product) AS num_sold,
-GROUP_CONCAT(DISTINCT product) AS 'products' 
-FROM Activities
-GROUP BY sell_date
-ORDER BY sell_date
-```
 
 [1341. Movie Rating](https://leetcode.com/problems/movie-rating/)
 
@@ -1419,7 +1397,59 @@ AS SecondHighestSalary
 ```
 
 
- 
+ [1484. Group Sold Products By The Date](https://leetcode.com/problems/group-sold-products-by-the-date/)
+
+🧠 Question Translate
+
+प्रत्येक sell_date साठी
+
+किती Different Products विकले गेले?
+त्या Products ची Alphabetical List द्या.
+
+```sql
+SELECT sell_date, 
+COUNT(DISTINCT product) AS num_sold,
+GROUP_CONCAT(DISTINCT product) AS 'products' 
+FROM Activities
+GROUP BY sell_date
+ORDER BY sell_date
+```
+
+[1327. List the Products Ordered in a Period](https://leetcode.com/problems/list-the-products-ordered-in-a-period/)
+🧠 Question Translate
+
+February 2020 मध्ये
+
+प्रत्येक Product चे
+
+Total Units
+
+काढा.
+
+जर
+
+Total Units >=100
+
+असतील तर
+
+Product Name + Total Units
+
+Return करा.
+
+```sql
+-- name, amt
+-- >= 100 units, feb 2020
+
+SELECT
+    a.product_name,
+    SUM(b.unit) AS unit
+FROM Products AS a
+JOIN Orders AS b
+ON a.product_id = b.product_id
+WHERE b.order_date BETWEEN '2020-02-01' AND '2020-02-29'
+GROUP BY a.product_id
+HAVING SUM(b.unit) >= 100;
+```
 [1517. Find Users With Valid E-Mails](https://leetcode.com/problems/find-users-with-valid-e-mails)
 ```sql
 SELECT *
