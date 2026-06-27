@@ -911,6 +911,17 @@ FROM Accounts
 WHERE income > 50000;
 
  ```
+ [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company)
+```sql
+SELECT employee_id
+FROM Employees
+WHERE manager_id NOT IN (
+    SELECT employee_id 
+    FROM Employees
+)
+AND salary < 30000
+ORDER BY employee_id
+```
 [626. Exchange Seats](https://leetcode.com/problems/exchange-seats/)
 ```sql
 -- id, student
@@ -1012,19 +1023,6 @@ SELECT
 FROM insurance
 WHERE tiv_2015 IN (SELECT tiv_2015 FROM insurance GROUP BY tiv_2015 HAVING COUNT(*) > 1)
 AND (lat,lon) IN (SELECT lat,lon FROM insurance GROUP BY lat,lon HAVING COUNT(*) = 1)
-```
-
-
-[1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company)
-```sql
-SELECT employee_id
-FROM Employees
-WHERE manager_id NOT IN (
-    SELECT employee_id 
-    FROM Employees
-)
-AND salary < 30000
-ORDER BY employee_id
 ```
 
 [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries)
