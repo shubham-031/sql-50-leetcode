@@ -779,6 +779,20 @@ AND num = prev;
 
 
 [1164. Product Price at a Given Date](https://leetcode.com/problems/product-price-at-a-given-date)
+
+1️⃣ Question Translate
+
+2019-08-16 रोजी प्रत्येक Product ची Price काय होती?
+
+⚠️ 16 नंतरचे Changes Ignore करायचे.
+
+⚠️ जर 16 पर्यंत Price Change झालाच नसेल
+
+↓
+
+Default Price = 10
+
+
 ```sql
 SELECT product_id, new_price AS price
 FROM products
@@ -793,7 +807,7 @@ UNION
 
 SELECT product_id, 10 AS price
 FROM products
-WHEN product_id NOT IN
+WHERE product_id NOT IN
 (
   SELECT product_id
   FROM products
