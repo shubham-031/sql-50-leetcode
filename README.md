@@ -1214,12 +1214,48 @@ LIMIT 1;
 ```
 
 [585. Investments in 2016](https://leetcode.com/problems/investments-in-2016)
+
+🧠 Question Translate
+
+ज्या Policy Holders साठी:
+
+✅ Condition 1
+
+tiv_2015 दुसऱ्या कोणासोबत Same असला पाहिजे.
+
+म्हणजे
+
+COUNT(tiv_2015) > 1
+✅ Condition 2
+
+त्यांचे
+
+(lat, lon)
+
+Unique असले पाहिजे.
+
+म्हणजे
+
+COUNT(lat, lon) = 1
+
+शेवटी
+
+त्यांच्या tiv_2016 ची SUM करा.
+
 ```sql
 SELECT
     ROUND(SUM(tiv_2016),2) AS tiv_2016
 FROM insurance
-WHERE tiv_2015 IN (SELECT tiv_2015 FROM insurance GROUP BY tiv_2015 HAVING COUNT(*) > 1)
-AND (lat,lon) IN (SELECT lat,lon FROM insurance GROUP BY lat,lon HAVING COUNT(*) = 1)
+WHERE tiv_2015 IN 
+   (SELECT tiv_2015 
+   FROM insurance 
+   GROUP BY tiv_2015
+   HAVING COUNT(*) > 1)
+AND (lat,lon) IN 
+     (SELECT
+      lat,lon FROM insurance
+      GROUP BY lat,lon
+      HAVING COUNT(*) = 1)
 ```
 
 [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries)
