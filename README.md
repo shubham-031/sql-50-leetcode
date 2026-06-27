@@ -814,97 +814,31 @@ WHERE product_id NOT IN
   WHERE change_date <= '2019-08-16'
 )
 ```
-
-
-[1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company)
-```sql
-SELECT employee_id
-FROM Employees
-WHERE manager_id NOT IN (
-    SELECT employee_id 
-    FROM Employees
-)
-AND salary < 30000
-ORDER BY employee_id
-```
-
-[185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries)
-```sql
-WITH RankedSalaries AS 
-(SELECT 
-    e.Id AS employee_id,
-    e.name AS employee,
-    e.salary,
-    e.departmentId,
-    DENSE_RANK() OVER (PARTITION BY e.departmentId ORDER BY e.salary DESC) AS salary_rank 
-FROM Employee e)
-SELECT d.name AS Department,
-r.employee,
-r.salary
-FROM Department d
-JOIN RankedSalaries r ON r.departmentId = d.id
-WHERE r.salary_rank <=3;
-```
-
-
-[1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table)
-```sql
-SELECT user_id, CONCAT(UPPER(LEFT(name, 1)), LOWER(RIGHT(name, LENGTH(name)-1))) AS name
-FROM Users
-ORDER BY user_id
-```
-
-[1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition)
-```sql
-SELECT patient_id, patient_name, conditions 
-FROM patients 
-WHERE conditions LIKE '% DIAB1%' 
-OR conditions LIKE 'DIAB1%'
-```
-
-[196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails)
-```sql
-DELETE p
-FROM Person p, Person q
-WHERE p.id > q.id
-AND q.Email = p.Email
-```
-
-[176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary)
-```sql
-SELECT
-(SELECT DISTINCT Salary 
-FROM Employee
-ORDER BY Salary DESC
-LIMIT 1 OFFSET 1)
-AS SecondHighestSalary
-
--- HINT: subquery is used to return null if there is no SecondHighestSalary
-```
-
-
- 
-[1517. Find Users With Valid E-Mails](https://leetcode.com/problems/find-users-with-valid-e-mails)
-```sql
-SELECT *
-FROM Users
-WHERE mail REGEXP '^[A-Za-z][A-Za-z0-9_\.\-]*@leetcode\\.com$'
-```
-
 [1204. Last Person to Fit in the Bus](https://leetcode.com/problems/last-person-to-fit-in-the-bus/)
+
+
+1️⃣ Question Translate
+
+Bus ची Weight Limit = 1000 kg
+
+लोक turn नुसार Bus मध्ये चढतात.
+
+👉 1000 kg च्या आत बसू शकणारा शेवटचा Person कोण?
 ```sql
 -- 1000 kg limit
 -- name of last person
 
-WITH CTE AS (
-    SELECT person_name, weight, turn, SUM(weight) 
-    OVER(ORDER BY turn) AS total_weight
-    FROM Queue
-)
 SELECT person_name
-FROM cte
-WHERE total_weight <=1000
-ORDER BY total_weight DESC
+FROM
+(
+    SELECT
+        person_name,
+        turn,
+        SUM(weight) OVER(ORDER BY turn) AS total_weight
+    FROM Queue
+) AS a
+WHERE total_weight <= 1000
+ORDER BY turn DESC
 LIMIT 1;
 ```
 
@@ -1022,4 +956,81 @@ FROM insurance
 WHERE tiv_2015 IN (SELECT tiv_2015 FROM insurance GROUP BY tiv_2015 HAVING COUNT(*) > 1)
 AND (lat,lon) IN (SELECT lat,lon FROM insurance GROUP BY lat,lon HAVING COUNT(*) = 1)
 ```
+
+
+[1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company)
+```sql
+SELECT employee_id
+FROM Employees
+WHERE manager_id NOT IN (
+    SELECT employee_id 
+    FROM Employees
+)
+AND salary < 30000
+ORDER BY employee_id
+```
+
+[185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries)
+```sql
+WITH RankedSalaries AS 
+(SELECT 
+    e.Id AS employee_id,
+    e.name AS employee,
+    e.salary,
+    e.departmentId,
+    DENSE_RANK() OVER (PARTITION BY e.departmentId ORDER BY e.salary DESC) AS salary_rank 
+FROM Employee e)
+SELECT d.name AS Department,
+r.employee,
+r.salary
+FROM Department d
+JOIN RankedSalaries r ON r.departmentId = d.id
+WHERE r.salary_rank <=3;
+```
+
+
+[1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table)
+```sql
+SELECT user_id, CONCAT(UPPER(LEFT(name, 1)), LOWER(RIGHT(name, LENGTH(name)-1))) AS name
+FROM Users
+ORDER BY user_id
+```
+
+[1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition)
+```sql
+SELECT patient_id, patient_name, conditions 
+FROM patients 
+WHERE conditions LIKE '% DIAB1%' 
+OR conditions LIKE 'DIAB1%'
+```
+
+[196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails)
+```sql
+DELETE p
+FROM Person p, Person q
+WHERE p.id > q.id
+AND q.Email = p.Email
+```
+
+[176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary)
+```sql
+SELECT
+(SELECT DISTINCT Salary 
+FROM Employee
+ORDER BY Salary DESC
+LIMIT 1 OFFSET 1)
+AS SecondHighestSalary
+
+-- HINT: subquery is used to return null if there is no SecondHighestSalary
+```
+
+
+ 
+[1517. Find Users With Valid E-Mails](https://leetcode.com/problems/find-users-with-valid-e-mails)
+```sql
+SELECT *
+FROM Users
+WHERE mail REGEXP '^[A-Za-z][A-Za-z0-9_\.\-]*@leetcode\\.com$'
+```
+
 
